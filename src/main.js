@@ -176,12 +176,12 @@ function createChart(
       labels: labels,
       datasets: [
         {
-          label: "NV Energy power consumed",
+          label: "Power from NV Energy Consumed",
           data: deliveredUsageValues,
           borderWidth: 1,
         },
         {
-          label: "Solar excess provided to NV Energy",
+          label: "Solar Excess Provided to NV Energy",
           data: receivedUsageValues,
           borderWidth: 1,
         },
@@ -205,7 +205,7 @@ function createChart(
         x: {
           title: {
             display: true,
-            text: "Date Range",
+            text: "Time Range",
           },
         },
       },
@@ -262,7 +262,12 @@ function getTimeGrouping(dateAsString, groupingType) {
   if (groupingType === "year") {
     result = fullDate.getFullYear();
   } else if (groupingType === "day") {
-    result = fullDate.getMonth() + 1 + "-" + (fullDate.getDate() + 1);
+    result =
+      fullDate.getFullYear() +
+      "-" +
+      (fullDate.getMonth() + 1) +
+      "-" +
+      (fullDate.getDate() + 1);
   } else {
     result = fullDate.getFullYear() + "-" + (fullDate.getMonth() + 1);
   }
