@@ -8,6 +8,10 @@ let energyData = [];
 let usageDelivered = [];
 let usageReceived = [];
 
+let yearChart = new Chart(dayCtx, {});
+let monthChart = new Chart(monthCtx, {});
+let dayChart = new Chart(yearCtx, {});
+
 function showDayChart() {
   var checkbox = document.getElementById("checkShowDayChart");
   var chart = document.getElementById("dayChart");
@@ -41,77 +45,114 @@ function showYearChart() {
   }
 }
 
+function updateSuccessMessage(message, optionalTextColor) {
+  var p = document.getElementById("successStatus");
+  p.innerText = message;
+
+  if (optionalTextColor !== "undefined") {
+    p.style.color = optionalTextColor;
+  }
+}
+
 // CSV parsing
 // Desc: Reads csv data from uploaded file, outputs delivered and received
 //  values to the data elements 'usageDelivered' and 'usageReceived'
 const uploadSuccess = document
   .getElementById("uploadSuccess")
   .addEventListener("click", () => {
-    Papa.parse(document.getElementById("uploadFile").files[0], {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: function (answer) {
-        usageByDirection = getDataFromSoup(answer);
+    try {
+      Papa.parse(document.getElementById("uploadFile").files[0], {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function (answer) {
+          // Reset checkboxes
+          document.getElementById("checkShowDayChart").checked = false;
+          document.getElementById("checkShowMonthChart").checked = false;
+          document.getElementById("checkShowYearChart").checked = false;
 
-        // Year Chart Creation
-        let deliveredMapYear = prepDataForChart(
-          usageByDirection.get("delivered"),
-          "year"
-        );
-        let deliveredKeysYear = Array.from(deliveredMapYear.keys());
-        let deliveredDataYear = Array.from(deliveredMapYear.values());
-        let receivedMapYear = prepDataForChart(
-          usageByDirection.get("received"),
-          "year"
-        );
-        let receivedDataYear = Array.from(receivedMapYear.values());
-        createChart(
-          yearCtx,
-          deliveredKeysYear,
-          deliveredDataYear,
-          receivedDataYear
-        );
+          // Reset canvases (make display: none)
+          document.getElementById("dayChart").style.display = "none";
+          document.getElementById("monthChart").style.display = "none";
+          document.getElementById("yearChart").style.display = "none";
 
-        // Month Chart Creation
-        let deliveredMapMonth = prepDataForChart(
-          usageByDirection.get("delivered"),
-          "month"
-        );
-        let deliveredKeysMonth = Array.from(deliveredMapMonth.keys());
-        let deliveredDataMonth = Array.from(deliveredMapMonth.values());
-        let receivedMapMonth = prepDataForChart(
-          usageByDirection.get("received"),
-          "month"
-        );
-        let receivedDataMonth = Array.from(receivedMapMonth.values());
-        createChart(
-          monthCtx,
-          deliveredKeysMonth,
-          deliveredDataMonth,
-          receivedDataMonth
-        );
+          // Grab required data from soup
+          usageByDirection = getDataFromSoup(answer);
 
-        // Year Chart Creation
-        let deliveredMapDay = prepDataForChart(
-          usageByDirection.get("delivered"),
-          "day"
-        );
-        let deliveredKeysDay = Array.from(deliveredMapDay.keys());
-        let deliveredDataDay = Array.from(deliveredMapDay.values());
-        let receivedMapDay = prepDataForChart(
-          usageByDirection.get("received"),
-          "day"
-        );
-        let receivedDataDay = Array.from(receivedMapDay.values());
-        createChart(
-          dayCtx,
-          deliveredKeysDay,
-          deliveredDataDay,
-          receivedDataDay
-        );
-      },
-    });
+          // Reset charts, if they exist
+          dayChart.destroy();
+          monthChart.destroy();
+          yearChart.destroy();
+
+          // Year Chart Creation
+          let deliveredMapYear = prepDataForChart(
+            usageByDirection.get("delivered"),
+            "year"
+          );
+          let deliveredKeysYear = Array.from(deliveredMapYear.keys());
+          let deliveredDataYear = Array.from(deliveredMapYear.values());
+          let receivedMapYear = prepDataForChart(
+            usageByDirection.get("received"),
+            "year"
+          );
+          let receivedDataYear = Array.from(receivedMapYear.values());
+          yearChart = createChart(
+            yearCtx,
+            deliveredKeysYear,
+            deliveredDataYear,
+            receivedDataYear
+          );
+
+          // Month Chart Creation
+          let deliveredMapMonth = prepDataForChart(
+            usageByDirection.get("delivered"),
+            "month"
+          );
+          let deliveredKeysMonth = Array.from(deliveredMapMonth.keys());
+          let deliveredDataMonth = Array.from(deliveredMapMonth.values());
+          let receivedMapMonth = prepDataForChart(
+            usageByDirection.get("received"),
+            "month"
+          );
+          let receivedDataMonth = Array.from(receivedMapMonth.values());
+          monthChart = createChart(
+            monthCtx,
+            deliveredKeysMonth,
+            deliveredDataMonth,
+            receivedDataMonth
+          );
+
+          // Year Chart Creation
+          let deliveredMapDay = prepDataForChart(
+            usageByDirection.get("delivered"),
+            "day"
+          );
+          let deliveredKeysDay = Array.from(deliveredMapDay.keys());
+          let deliveredDataDay = Array.from(deliveredMapDay.values());
+          let receivedMapDay = prepDataForChart(
+            usageByDirection.get("received"),
+            "day"
+          );
+          let receivedDataDay = Array.from(receivedMapDay.values());
+          dayChart = createChart(
+            dayCtx,
+            deliveredKeysDay,
+            deliveredDataDay,
+            receivedDataDay
+          );
+
+          updateSuccessMessage(
+            "Graph creation completed. Use checkboxes to view graphs.",
+            "green"
+          );
+        },
+      });
+    } catch (error) {
+      updateSuccessMessage(
+        "Failure to load file, error message below: \n" + error,
+        "red"
+      );
+    }
   });
 
 function createChart(
