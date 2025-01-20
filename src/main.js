@@ -76,6 +76,11 @@ const uploadSuccess = document
           document.getElementById("monthChart").style.display = "none";
           document.getElementById("yearChart").style.display = "none";
 
+          // Reset data arrays
+          energyData = [];
+          usageDelivered = [];
+          usageReceived = [];
+
           // Grab required data from soup
           usageByDirection = getDataFromSoup(answer);
 
@@ -100,7 +105,8 @@ const uploadSuccess = document
             yearCtx,
             deliveredKeysYear,
             deliveredDataYear,
-            receivedDataYear
+            receivedDataYear,
+            "Year"
           );
 
           // Month Chart Creation
@@ -108,7 +114,7 @@ const uploadSuccess = document
             usageByDirection.get("delivered"),
             "month"
           );
-          let deliveredKeysMonth = Array.from(deliveredMapMonth.keys());
+          let deliveredKeysMonth = Array.from(deliveredMapMonth.keys()).sort();
           let deliveredDataMonth = Array.from(deliveredMapMonth.values());
           let receivedMapMonth = prepDataForChart(
             usageByDirection.get("received"),
@@ -119,7 +125,8 @@ const uploadSuccess = document
             monthCtx,
             deliveredKeysMonth,
             deliveredDataMonth,
-            receivedDataMonth
+            receivedDataMonth,
+            "Month"
           );
 
           // Year Chart Creation
@@ -138,7 +145,8 @@ const uploadSuccess = document
             dayCtx,
             deliveredKeysDay,
             deliveredDataDay,
-            receivedDataDay
+            receivedDataDay,
+            "Day"
           );
 
           updateSuccessMessage(
@@ -159,7 +167,8 @@ function createChart(
   context,
   labels,
   deliveredUsageValues,
-  receivedUsageValues
+  receivedUsageValues,
+  groupingType
 ) {
   result = new Chart(context, {
     type: "bar",
@@ -179,9 +188,25 @@ function createChart(
       ],
     },
     options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "Power Flow by " + groupingType,
+        },
+      },
       scales: {
         y: {
           beginAtZero: true,
+          title: {
+            display: true,
+            text: "kWh",
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Date Range",
+          },
         },
       },
     },
