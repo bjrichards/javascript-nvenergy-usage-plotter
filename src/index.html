@@ -21,16 +21,19 @@
             <h3> by Braeden Richards </h3>
         </header>
 
+        <!-- Instructions -->
         <p> To use in current state, choose a NV Energy export file that is on your computer by pressing the <i><strong>Browse...</strong></i> button and navigating to the file.</p>
         <p> Once file is chosen, press the <i><strong>file uploaded</strong></i> button.</p>
         <p> To choose which graphs to see (day grouped, month grouped, or year grouped), check the corresponding checkboxes below.</p>
 
+        <!-- File upload -->
         <input type="file" id="uploadFile" accept=".csv">
         <button id="uploadSuccess">file uploaded</button>
 
         <br>
         <br>
 
+        <!-- Checkboxes for which graphs to show -->
         <div>
             <input type="checkbox" id="checkShowDayChart" onclick="showDayChart()" autocomplete="off">
             <label for="checkShowDayChart"> Show data by day chart</label>
@@ -43,6 +46,11 @@
             <input type="checkbox" id="checkShowYearChart" onclick="showYearChart()" autocomplete="off">
             <label for="checkShowYearChart"> Show data by year chart</label>
         </div>
+
+        <br>
+        <br>
+
+        <!-- Charts -->
         <div>
             <canvas id="dayChart" style="display: none">
             </canvas>
