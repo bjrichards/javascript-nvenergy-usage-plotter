@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <title> Your NV Energy Usage Stats </title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Papa Parse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+
+    <!-- Custom js -->
+    <script type="text/javascript" src="main.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <header>
+            <h1> Free Online NV Energy Usage Plotter </h1>
+            <h3> by Braeden Richards </h3>
+        </header>
+        <p> Example text for use of showing page is loading. </p>
+        <input type="file" id="uploadFile" accept=".csv">
+        <button id="uploadSuccess">file uploaded</button>
+        <div>
+            <input type="checkbox" id="checkShowDayChart" onclick="showDayChart()" autocomplete="off">
+            <label for="checkShowDayChart"> Show data by day chart</label>
+        </div>
+        <div>
+            <input type="checkbox" id="checkShowMonthChart" onclick="showMonthChart()" autocomplete="off">
+            <label for="checkShowMonthChart"> Show data by month chart</label>
+        </div>
+        <div>
+            <input type="checkbox" id="checkShowYearChart" onclick="showYearChart()" autocomplete="off">
+            <label for="checkShowYearChart"> Show data by year chart</label>
+        </div>
+        <div>
+            <canvas id="dayChart" style="display: none">
+            </canvas>
+            <canvas id="monthChart" style="display: none">
+            </canvas>
+            <canvas id="yearChart" style="display: none">
+            </canvas>
+        </div>
+    </div>
+</body>
+
+</html>
