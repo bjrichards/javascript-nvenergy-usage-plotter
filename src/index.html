@@ -22,9 +22,28 @@
         </header>
 
         <!-- Instructions -->
-        <p> To use in current state, choose a NV Energy export file that is on your computer by pressing the <i><strong>Browse...</strong></i> button and navigating to the file.</p>
-        <p> Once file is chosen, press the <i><strong>file uploaded</strong></i> button.</p>
-        <p> To choose which graphs to see (day grouped, month grouped, or year grouped), check the corresponding checkboxes below.</p>
+        <p><strong>Instructions for use</strong></p>
+        <ul>
+            <li> Choose an NV Energy export file (.csv) that is on your computer by pressing the <i><strong>Browse...</strong></i> button and navigating to the file.</li>
+            <li> Once file is chosen, press the <i><strong>Generate graphs</strong></i> button.</li>
+            <li> To choose which graphs to see (day grouped, month grouped, or year grouped), check the corresponding checkboxes below.</li>
+        </ul>
+        
+        <!-- Explanation of data -->
+        <p> <strong>Explanation of graphed data.</strong></p> 
+        <ul>
+            <li><strong>NV Energy power consumed:</strong> this is the power you used from NV Energy. If you have solar panels, this could be during the night, stormy days, etc. Essentially any time you used more power than you generated.</li>
+            <li><strong>Solar excess provided to NV Energy:</strong> this is excess power that you generated (not from NV Energy) that was added back to the grid. For example, this could be during the middle of the day when you aren't home using much power but your solar panels are generating maximum electricity.</li>
+        </ul>
+
+        <!-- Purpose -->
+        <p><strong>Purpose</strong></p>
+        <p>The purpose of this web-app is to be an easily readable alternative to NV Energy's own electricity usage graph. I found the NV Energy graph was difficult to decipher the amount of excess electricity my solar panels are sending back to the grid versus the amount of electricity I use from the grid.</p>
+
+        <!-- Disclaimer -->
+        <p><strong>No data you upload will leave your computer. All calculations, groupings, data cleaning, graph creation, etc. is done within your browser locally on your computer. At no time does any of your data get sent to an external source/site. The only non-native libraries used in creation of this app is PapaParse and Chart.js</strong></p>
+        <p><i>This tool was created by me personally and is not affiliated with NV Energy or any other company/energy provider/solar company/etc.</i></p>
+
 
         <!-- File upload -->
         <input type="file" id="uploadFile" accept=".csv">

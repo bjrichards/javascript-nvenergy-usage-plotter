@@ -167,12 +167,12 @@ function createChart(
       labels: labels,
       datasets: [
         {
-          label: "Delivered to House",
+          label: "NV Energy power consumed",
           data: deliveredUsageValues,
           borderWidth: 1,
         },
         {
-          label: "Received by NV Energy",
+          label: "Solar excess provided to NV Energy",
           data: receivedUsageValues,
           borderWidth: 1,
         },
