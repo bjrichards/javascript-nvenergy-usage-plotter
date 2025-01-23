@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The purpose of this web-app is to be an easily readable alternative to NV Energy's own electricity usage graph. I found the NV Energy graph was difficult to decipher the amount of excess electricity my solar panels are sending back to the grid versus the amount of electricity I use from the grid.
+The purpose of this web-app is to be an easily readable alternative to NV Energy's own electricity usage chart. I found the chart available on NV Energy's dashboard was difficult to read/understand. The NV Energy dashboard uses a stacked column chart that does not present received vs. delivered power flow values in a way the average user can understand.
 
 ## Instructions for Use
 
@@ -47,4 +47,4 @@ _This tool was created by me personally and is not affiliated with NV Energy or 
 
 Example of use using the non-formatted/styled tool (via this repo, not from the above provided _tools_ hosted site)
 
-<img src="./example_img/example_0.png">
+<img src="./example_img/example_0_comp.png">
