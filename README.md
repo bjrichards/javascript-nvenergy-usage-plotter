@@ -9,7 +9,7 @@ The purpose of this web-app is to be an easily readable alternative to NV Energy
 ### To Access
 
 - Via hosted site (formatted/styled)
-  - [NV Energy Usage Plotter](https://www.braedenrichards.com/tools/nvenergy-usage-tool/nvenergy-usage-tool)
+  - [NV Energy Usage Plotter](https://www.braedenrichards.com/pages/tools/nvenergy-usage-tool/nvenergy-usage-tool)
 - Hosting yourself (No formatting/styling)
   - Download/pull this repository. The files in /src/ are the only required files to run
     - An internet connection is required since I am pulling libraries from their hosted sites
